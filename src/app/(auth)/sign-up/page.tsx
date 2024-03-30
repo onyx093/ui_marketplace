@@ -9,11 +9,11 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
 } from "@/lib/validators/account-credentials-validator";
+import { trpc } from "@/trpc/client";
 
 const SignUp = () => {
   const {
@@ -24,7 +24,13 @@ const SignUp = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {};
+  const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({});
+
+  // const { data } = trpc.anyApiRoute.useQuery();
+
+  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+    mutate({ email, password });
+  };
 
   return (
     <>
@@ -53,6 +59,7 @@ const SignUp = () => {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     {...register("email")}
+                    type="text"
                     className={cn({
                       "focus-visible:ring-red-500": errors.email,
                     })}
@@ -63,6 +70,7 @@ const SignUp = () => {
                   <Label htmlFor="password">Password</Label>
                   <Input
                     {...register("password")}
+                    type="password"
                     className={cn({
                       "focus-visible:ring-red-500": errors.password,
                     })}

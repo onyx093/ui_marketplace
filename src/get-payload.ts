@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import path from "node:path";
-import payload from "payload";
+import payload, { Payload } from "payload";
 import type {InitOptions} from "payload/config";
 
 dotenv.config({
@@ -20,7 +20,7 @@ interface InitSettings {
     initOptions?: Partial<InitOptions>;
 }
 
-export const getPayloadClient = async (settings: InitSettings = {}) => {
+export const getPayloadClient = async (settings: InitSettings = {}): Promise<Payload> => {
     const { initOptions } = settings;
     if(!process.env.PAYLOAD_SECRET) {
         throw new Error("PAYLOAD_SECRET is missing!");
