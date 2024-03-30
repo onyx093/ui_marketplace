@@ -18,10 +18,10 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
   if (isError) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <XCircle className="w-8 h-8 text-zinc-300 animate-spin" />
-        <div className="font-semibold">Verifying...</div>
+        <XCircle className="w-8 h-8 text-red-600" />
+        <div className="font-semibold">There was a problem</div>
         <p className="text-muted-foreground text-sm">
-          This won&apos;t take long.
+          This token is invalid or might be expired. Please, try again later.
         </p>
       </div>
     );
@@ -52,10 +52,10 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <Loader2 className="w-8 h-8 text-red-600" />
-        <div className="font-semibold">There was a problem</div>
+        <Loader2 className="w-8 h-8 text-zinc-300 animate-spin" />
+        <div className="font-semibold">Verifying...</div>
         <p className="text-muted-foreground text-sm">
-          This token is invalid or might be expired. Please, try again later.
+          This won&apos;t take long.
         </p>
       </div>
     );
