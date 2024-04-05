@@ -118,7 +118,7 @@ const ProductPage = async ({ params }: PageProps) => {
           </div>
         </div>
 
-        <div className="lg:max-w-lg mt-10 lg:col-start-1 lg:row-start-2 lg:self-start">
+        <div className="lg:max-w-lg mt-10 lg:col-start-1 lg:row-span-2 lg:self-start">
           <div>
             <div className="mt-10">
               <AddToCartButton product={product} />
