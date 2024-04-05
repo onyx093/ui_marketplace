@@ -4,8 +4,8 @@ import { Product } from "@/payload-types";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 import Link from "next/link";
-import { cn, formatPrice } from "@/lib/utils";
-import { PRODUCT_CATEGORIES } from "@/config";
+import { cn, formatPrice, getValidURLSForProduct } from "@/lib/utils";
+import { getProductLabel } from "@/config";
 import ImageSlider from "./ImageSlider";
 
 interface ProductListingProps {
@@ -30,13 +30,9 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
     return <ProductPlaceholder />;
   }
 
-  const label = PRODUCT_CATEGORIES.find(
-    ({ value }) => value === product.category
-  )?.label;
+  const productLabel = getProductLabel(product);
 
-  const validUrls = product.images
-    .map(({ image }) => (typeof image === "string" ? image : image.url))
-    .filter(Boolean) as string[];
+  const validUrls = getValidURLSForProduct(product)
 
   if (isVisible && product) {
     return (
@@ -51,7 +47,7 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
           <h3 className="text-sm text-gray-700 font-medium mt-4">
             {product.name}
           </h3>
-          <p className="text-sm text-gray-500 mt-1">{label}</p>
+          <p className="text-sm text-gray-500 mt-1">{productLabel}</p>
           <p className="text-sm text-gray-900 font-medium mt-1">
             {formatPrice(product.price)}
           </p>
