@@ -33,6 +33,7 @@ const Cart = () => {
     (total, { product }) => total + product.price,
     0
   );
+
   const fee = 5;
   return (
     <Sheet>
