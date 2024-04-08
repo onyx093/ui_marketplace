@@ -5,6 +5,7 @@ import ProductReel from "@/components/ProductReel";
 import { getProductLabel } from "@/config";
 import { getPayloadClient } from "@/get-payload";
 import { formatPrice, getValidURLSForProduct } from "@/lib/utils";
+import { Product } from "@/payload-types";
 import { Check, Shield } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
